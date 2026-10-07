@@ -1,0 +1,448 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Urban Dreams — Sergii Leontiev &amp; Daria Shutko</title>
+<meta name="description" content="Urban Dreams — five moods for solo piano by Sergii Leontiev, performed by Daria Shutko. Listen on Apple Music, Spotify and YouTube Music.">
+<meta name="theme-color" content="#18121e">
+<link rel="canonical" href="https://urban-dreams.github.io/">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="manifest" href="site.webmanifest">
+<meta property="og:type" content="music.album">
+<meta property="og:url" content="https://urban-dreams.github.io/">
+<meta property="og:title" content="Urban Dreams — Sergii Leontiev &amp; Daria Shutko">
+<meta property="og:description" content="Five moods for solo piano. Listen on Apple Music, Spotify and YouTube Music.">
+<meta property="og:image" content="https://urban-dreams.github.io/assets/og-cover.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="1200">
+<meta name="twitter:card" content="summary">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500&display=swap">
+<style>
+  :root {
+    --bg: #18121e;
+    --ink: #f6f1f8;
+    --muted: rgba(240, 231, 246, .72);
+    --faint: rgba(240, 231, 246, .5);
+    --line: rgba(255, 255, 255, .12);
+    --glass: rgba(255, 255, 255, .07);
+    --glass-hi: rgba(255, 255, 255, .13);
+    --pink: #f4b4cf;
+    --gold: #e6b673;
+    --radius: 18px;
+    --sans: "Jost", system-ui, -apple-system, "Segoe UI", sans-serif;
+    color-scheme: dark;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    min-height: 100vh;
+    background: var(--bg);
+    color: var(--ink);
+    font: 400 15px/1.5 var(--sans);
+    -webkit-font-smoothing: antialiased;
+  }
+  img, svg { display: block; max-width: 100%; }
+  a { color: inherit; text-decoration: none; }
+  h1, h2, p { margin: 0; }
+  ul, ol { list-style: none; margin: 0; padding: 0; }
+  button { font: inherit; color: inherit; }
+  .sr-only {
+    position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+    overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+  }
+
+  /* ---------- Backdrop: blurred photo, tinted with the cover's dusk palette ---------- */
+  .backdrop {
+    position: fixed; top: 0; left: 0; right: 0;
+    height: 100vh;
+    height: 100lvh;
+    z-index: -1;
+    overflow: hidden;
+    background: var(--bg);
+  }
+  .backdrop::before {
+    content: "";
+    position: absolute; inset: -3%;
+    background:
+      radial-gradient(55% 35% at 88% 4%, rgba(255, 206, 162, .32), transparent 70%),
+      linear-gradient(180deg, rgba(24, 18, 30, .12) 0%, rgba(24, 18, 30, .55) 55%, rgba(24, 18, 30, .9) 100%),
+      linear-gradient(180deg, #a49cc2 0%, #84607f 48%, #3a2741 100%),
+      url("assets/bg-blur.jpg") center 18% / cover no-repeat;
+    background-blend-mode: screen, normal, multiply, normal;
+  }
+  .backdrop::after {
+    content: "";
+    position: absolute; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    opacity: .14;
+    mix-blend-mode: overlay;
+  }
+
+  /* ---------- Layout ---------- */
+  .wrap {
+    width: min(100%, 480px);
+    margin: 0 auto;
+    padding:
+      max(20px, env(safe-area-inset-top)) 20px
+      max(36px, env(safe-area-inset-bottom));
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 44px;
+  }
+  .badge {
+    font: 500 11px/1 var(--sans);
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    color: var(--muted);
+    padding: 9px 12px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, .04);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+  }
+  .icon-btn {
+    width: 44px; height: 44px;
+    display: grid; place-items: center;
+    border: 1px solid var(--line);
+    border-radius: 50%;
+    background: rgba(255, 255, 255, .04);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    cursor: pointer;
+    transition: background .2s, border-color .2s;
+  }
+  .icon-btn svg { width: 19px; height: 19px; }
+  .icon-btn:hover { background: var(--glass-hi); border-color: rgba(255, 255, 255, .22); }
+
+  /* ---------- Cover with ambient glow ---------- */
+  .cover {
+    position: relative;
+    isolation: isolate;
+    width: min(74vw, 300px);
+    margin: 0 auto;
+  }
+  .cover::before {
+    content: "";
+    position: absolute;
+    inset: 8% 2% -8%;
+    z-index: -1;
+    background: url("assets/cover-600.webp") center / cover;
+    filter: blur(38px) saturate(1.5);
+    opacity: .7;
+    transform: translateZ(0);
+  }
+  .cover img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1;
+    border-radius: 4px;
+    box-shadow: 0 28px 50px -22px rgba(0, 0, 0, .75), 0 0 0 1px rgba(255, 255, 255, .06);
+  }
+
+  /* ---------- Title block ---------- */
+  .intro { text-align: center; }
+  .composer {
+    font: 500 12px/1 var(--sans);
+    letter-spacing: .34em;
+    text-transform: uppercase;
+    color: var(--muted);
+    padding-left: .34em; /* optically centre letter-spaced caps */
+  }
+  .title {
+    margin-top: 14px;
+    font: 300 clamp(30px, 9.4vw, 46px)/1.05 var(--sans);
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    padding-left: .12em;
+  }
+  .subtitle {
+    margin-top: 8px;
+    font: 300 clamp(17px, 4.8vw, 20px)/1.3 var(--sans);
+    letter-spacing: .04em;
+    color: var(--pink);
+  }
+  .rule {
+    position: relative;
+    width: 168px; height: 9px;
+    margin: 14px auto 12px;
+  }
+  .rule::before {
+    content: "";
+    position: absolute; left: 0; right: 0; top: 4px; height: 1px;
+    background: linear-gradient(90deg, transparent, var(--pink) 30%, var(--pink) 70%, transparent);
+    opacity: .75;
+  }
+  .rule::after {
+    content: "";
+    position: absolute; left: 50%; top: 0; width: 1px; height: 9px;
+    background: var(--pink);
+  }
+  .performer {
+    font: 500 12px/1 var(--sans);
+    letter-spacing: .3em;
+    text-transform: uppercase;
+    color: var(--ink);
+    padding-left: .3em;
+  }
+  .performer em {
+    font: 300 16px/1 var(--sans);
+    letter-spacing: .04em;
+    text-transform: none;
+    color: var(--pink);
+    margin-left: .2em;
+  }
+
+  /* ---------- Streaming links ---------- */
+  .label {
+    font: 500 11px/1 var(--sans);
+    letter-spacing: .24em;
+    text-transform: uppercase;
+    color: var(--faint);
+  }
+  .listen .label { text-align: center; margin-bottom: 14px; }
+  .links { display: grid; gap: 10px; }
+  .link {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    min-height: 64px;
+    padding: 12px 16px 12px 14px;
+    border-radius: var(--radius);
+    background: var(--glass);
+    border: 1px solid var(--line);
+    -webkit-backdrop-filter: blur(16px) saturate(140%);
+    backdrop-filter: blur(16px) saturate(140%);
+    transition: background .25s, border-color .25s, transform .25s, box-shadow .25s;
+  }
+  .link__icon { width: 34px; height: 34px; flex: none; }
+  .link__name { font: 500 17px/1.2 var(--sans); }
+  .link__cta {
+    margin-left: auto;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font: 500 13px/1 var(--sans);
+    color: var(--muted);
+    padding: 9px 12px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, .07);
+    transition: background .25s, color .25s;
+  }
+  .link__cta svg { width: 14px; height: 14px; transition: transform .25s; }
+  .link:hover {
+    background: var(--glass-hi);
+    border-color: color-mix(in srgb, var(--brand) 55%, transparent);
+    box-shadow: 0 12px 30px -14px color-mix(in srgb, var(--brand) 70%, transparent);
+    transform: translateY(-1px);
+  }
+  .link:hover .link__cta { background: var(--brand); color: var(--brand-ink, #fff); }
+  .link:hover .link__cta svg { transform: translate(2px, -2px); }
+  .link:active { transform: translateY(0) scale(.99); }
+
+  a:focus-visible, button:focus-visible {
+    outline: 2px solid var(--pink);
+    outline-offset: 3px;
+  }
+
+  /* ---------- Tracklist ---------- */
+  .card {
+    border-radius: var(--radius);
+    background: rgba(20, 14, 26, .42);
+    border: 1px solid var(--line);
+    -webkit-backdrop-filter: blur(18px) saturate(130%);
+    backdrop-filter: blur(18px) saturate(130%);
+    padding: 20px 18px 8px;
+  }
+  .card__head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    padding: 0 2px 12px;
+    border-bottom: 1px solid var(--line);
+  }
+  .card__head .meta { font-size: 12px; color: var(--faint); }
+  .tracklist li {
+    display: grid;
+    grid-template-columns: 34px 1fr auto;
+    align-items: baseline;
+    gap: 8px;
+    padding: 14px 2px;
+  }
+  .tracklist li + li { border-top: 1px solid rgba(255, 255, 255, .07); }
+  .tn { font: 500 12px/1 var(--sans); letter-spacing: .08em; color: var(--gold); }
+  .tt { font: 400 17px/1.3 var(--sans); }
+  .td { font: 400 12px/1 var(--sans); color: var(--faint); font-variant-numeric: tabular-nums; }
+
+  /* ---------- Footer ---------- */
+  .foot {
+    text-align: center;
+    font-size: 12px;
+    line-height: 1.6;
+    color: var(--faint);
+    display: grid;
+    gap: 6px;
+    padding: 4px 8px 0;
+  }
+
+  /* ---------- Toast ---------- */
+  .toast {
+    position: fixed;
+    left: 50%; bottom: max(24px, env(safe-area-inset-bottom));
+    transform: translate(-50%, 16px);
+    padding: 10px 16px;
+    border-radius: 999px;
+    background: rgba(246, 241, 248, .95);
+    color: #18121e;
+    font: 500 13px/1 var(--sans);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .25s, transform .25s;
+  }
+  .toast.is-visible { opacity: 1; transform: translate(-50%, 0); }
+
+  /* ---------- Motion ---------- */
+  @media (prefers-reduced-motion: no-preference) {
+    .reveal { animation: rise .9s cubic-bezier(.2, .7, .2, 1) both; animation-delay: calc(var(--i, 0) * 90ms); }
+    @keyframes rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+  }
+
+  @media (min-width: 720px) {
+    .wrap { padding-top: 40px; padding-bottom: 56px; gap: 32px; }
+    .cover { width: 340px; }
+  }
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <linearGradient id="g-apple" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fb5c74"/>
+      <stop offset="1" stop-color="#fa233b"/>
+    </linearGradient>
+  </defs>
+  <symbol id="i-apple" viewBox="0 0 24 24"><path d="M23.994 6.124a9.23 9.23 0 00-.24-2.19c-.317-1.31-1.062-2.31-2.18-3.043a5.022 5.022 0 00-1.877-.726 10.496 10.496 0 00-1.564-.15c-.04-.003-.083-.01-.124-.013H5.986c-.152.01-.303.017-.455.026-.747.043-1.49.123-2.193.4-1.336.53-2.3 1.452-2.865 2.78-.192.448-.292.925-.363 1.408-.056.392-.088.785-.1 1.18 0 .032-.007.062-.01.093v12.223c.01.14.017.283.027.424.05.815.154 1.624.497 2.373.65 1.42 1.738 2.353 3.234 2.801.42.127.856.187 1.293.228.555.053 1.11.06 1.667.06h11.03a12.5 12.5 0 001.57-.1c.822-.106 1.596-.35 2.295-.81a5.046 5.046 0 001.88-2.207c.186-.42.293-.87.37-1.324.113-.675.138-1.358.137-2.04-.002-3.8 0-7.595-.003-11.393zm-6.423 3.99v5.712c0 .417-.058.827-.244 1.206-.29.59-.76.962-1.388 1.14-.35.1-.706.157-1.07.173-.95.045-1.773-.6-1.943-1.536a1.88 1.88 0 011.038-2.022c.323-.16.67-.25 1.018-.324.378-.082.758-.153 1.134-.24.274-.063.457-.23.51-.516a.904.904 0 00.02-.193c0-1.815 0-3.63-.002-5.443a.725.725 0 00-.026-.185c-.04-.15-.15-.243-.304-.234-.16.01-.318.035-.475.066-.76.15-1.52.303-2.28.456l-2.325.47-1.374.278c-.016.003-.032.01-.048.013-.277.077-.377.203-.39.49-.002.042 0 .086 0 .13-.002 2.602 0 5.204-.003 7.805 0 .42-.047.836-.215 1.227-.278.64-.77 1.04-1.434 1.233-.35.1-.71.16-1.075.172-.96.036-1.755-.6-1.92-1.544-.14-.812.23-1.685 1.154-2.075.357-.15.73-.232 1.108-.31.287-.06.575-.116.86-.177.383-.083.583-.323.6-.714v-.15c0-2.96 0-5.922.002-8.882 0-.123.013-.25.042-.37.07-.285.273-.448.546-.518.255-.066.515-.112.774-.165.733-.15 1.466-.296 2.2-.444l2.27-.46c.67-.134 1.34-.27 2.01-.403.22-.043.442-.088.663-.106.31-.025.523.17.554.482.008.073.012.148.012.223.002 1.91.002 3.822 0 5.732z"/></symbol>
+  <symbol id="i-spotify" viewBox="0 0 24 24"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></symbol>
+  <symbol id="i-ytm" viewBox="0 0 24 24"><path d="M12 0C5.376 0 0 5.376 0 12s5.376 12 12 12 12-5.376 12-12S18.624 0 12 0zm0 19.104c-3.924 0-7.104-3.18-7.104-7.104S8.076 4.896 12 4.896s7.104 3.18 7.104 7.104-3.18 7.104-7.104 7.104zm0-13.332c-3.432 0-6.228 2.796-6.228 6.228S8.568 18.228 12 18.228s6.228-2.796 6.228-6.228S15.432 5.772 12 5.772zM9.684 15.54V8.46L15.816 12l-6.132 3.54z"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-share" viewBox="0 0 24 24"><path d="M12 14V3M7.5 7.5 12 3l4.5 4.5M5 11.5V19a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-7.5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+</svg>
+
+<div class="backdrop" aria-hidden="true"></div>
+
+<main class="wrap">
+  <div class="topbar reveal" style="--i:0">
+    <span class="badge">New EP · 2026</span>
+    <button class="icon-btn" type="button" data-share aria-label="Share this page">
+      <svg aria-hidden="true"><use href="#i-share"/></svg>
+    </button>
+  </div>
+
+  <div class="cover reveal" style="--i:1">
+    <picture>
+      <source type="image/webp" srcset="assets/cover-600.webp 600w, assets/cover-1000.webp 1000w" sizes="(min-width: 720px) 340px, 300px">
+      <img src="assets/cover-600.jpg" srcset="assets/cover-600.jpg 600w, assets/cover-1000.jpg 1000w" sizes="(min-width: 720px) 340px, 300px"
+           width="600" height="600" alt="Urban Dreams album cover" fetchpriority="high">
+    </picture>
+  </div>
+
+  <header class="intro reveal" style="--i:2">
+    <p class="composer">Sergii Leontiev</p>
+    <h1 class="title">Urban Dreams</h1>
+    <p class="subtitle">five moods for solo piano</p>
+    <div class="rule" aria-hidden="true"></div>
+    <p class="performer">Daria Shutko <em>piano</em></p>
+  </header>
+
+  <section class="listen reveal" style="--i:3" aria-labelledby="listen-h">
+    <h2 id="listen-h" class="label">Listen on</h2>
+    <ul class="links">
+      <li>
+        <a class="link" style="--brand:#fa2d48" href="https://music.apple.com/us/album/urban-dreams-ep/6817797079" target="_blank" rel="noopener">
+          <svg class="link__icon" aria-hidden="true"><use href="#i-apple" fill="url(#g-apple)"/></svg>
+          <span class="link__name">Apple Music</span>
+          <span class="link__cta">Listen <svg aria-hidden="true"><use href="#i-arrow"/></svg></span>
+          <span class="sr-only">(opens in a new tab)</span>
+        </a>
+      </li>
+      <li>
+        <a class="link" style="--brand:#1ed760;--brand-ink:#0b1f12" href="https://open.spotify.com/album/2CaxmMiK0eSk6dORPXIIlB?si=0aUNnC7AQyGJOR1S1vQ8yg" target="_blank" rel="noopener">
+          <svg class="link__icon" aria-hidden="true" fill="#1ed760"><use href="#i-spotify"/></svg>
+          <span class="link__name">Spotify</span>
+          <span class="link__cta">Listen <svg aria-hidden="true"><use href="#i-arrow"/></svg></span>
+          <span class="sr-only">(opens in a new tab)</span>
+        </a>
+      </li>
+      <li>
+        <a class="link" style="--brand:#ff1f1f" href="https://music.youtube.com/playlist?list=OLAK5uy_ngoKqx7g_zqY2QZro87z4xhUi64g6UGvE&amp;si=XMvksjoudCqmpSHV" target="_blank" rel="noopener">
+          <svg class="link__icon" aria-hidden="true" fill="#ff1f1f"><use href="#i-ytm"/></svg>
+          <span class="link__name">YouTube Music</span>
+          <span class="link__cta">Listen <svg aria-hidden="true"><use href="#i-arrow"/></svg></span>
+          <span class="sr-only">(opens in a new tab)</span>
+        </a>
+      </li>
+    </ul>
+  </section>
+
+  <section class="card reveal" style="--i:4" aria-labelledby="tracks-h">
+    <div class="card__head">
+      <h2 id="tracks-h" class="label">Tracklist</h2>
+      <span class="meta">5 tracks · 15 min</span>
+    </div>
+    <ol class="tracklist">
+      <li><span class="tn">I</span><span class="tt">Where the City Sleeps</span><span class="td">3:01</span></li>
+      <li><span class="tn">II</span><span class="tt">Fleeting Grace</span><span class="td">2:42</span></li>
+      <li><span class="tn">III</span><span class="tt">A Distant Light</span><span class="td">3:28</span></li>
+      <li><span class="tn">IV</span><span class="tt">Restless Dreams</span><span class="td">2:26</span></li>
+      <li><span class="tn">V</span><span class="tt">Quiet Resolve</span><span class="td">3:28</span></li>
+    </ol>
+  </section>
+
+  <footer class="foot reveal" style="--i:5">
+    <p>Released 25 September 2026 · ℗ 2026 Silver Scoring Studios</p>
+    <p>Supported by Kyiv Contemporary Music Days, Performing&nbsp;Arts&nbsp;Fund&nbsp;NL and Ministerie van Onderwijs, Cultuur en Wetenschap</p>
+  </footer>
+</main>
+
+<div class="toast" role="status" aria-live="polite"></div>
+
+<script>
+  (() => {
+    const btn = document.querySelector("[data-share]");
+    const toast = document.querySelector(".toast");
+    let timer;
+    const show = (msg) => {
+      toast.textContent = msg;
+      toast.classList.add("is-visible");
+      clearTimeout(timer);
+      timer = setTimeout(() => toast.classList.remove("is-visible"), 2200);
+    };
+    btn.addEventListener("click", async () => {
+      const url = location.href;
+      if (navigator.share) {
+        try { await navigator.share({ title: document.title, url }); } catch (_) { /* dismissed */ }
+        return;
+      }
+      try { await navigator.clipboard.writeText(url); show("Link copied"); }
+      catch (_) { show(url); }
+    });
+  })();
+</script>
+</body>
+</html>
